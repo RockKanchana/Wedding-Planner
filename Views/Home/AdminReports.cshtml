@@ -1,0 +1,202 @@
+@{
+    ViewData["Title"] = "Reports";
+}
+<div class="container mt-4">
+    <h2 class="mb-4">Admin Reports</h2>
+    <!-- Summary Cards -->
+    <div class="row mb-4">
+        <div class="col-md-2">
+            <div class="card text-white bg-primary mb-3">
+                <div class="card-body">
+                    <h6 class="card-title">Total Users</h6>
+                    <h3>120</h3>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="card text-white bg-success mb-3">
+                <div class="card-body">
+                    <h6 class="card-title">Couples</h6>
+                    <h3>60</h3>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="card text-white bg-info mb-3">
+                <div class="card-body">
+                    <h6 class="card-title">Planners</h6>
+                    <h3>20</h3>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="card text-white bg-warning mb-3">
+                <div class="card-body">
+                    <h6 class="card-title">Vendors</h6>
+                    <h3>30</h3>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="card text-white bg-secondary mb-3">
+                <div class="card-body">
+                    <h6 class="card-title">Weddings</h6>
+                    <h3>45</h3>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="card text-white bg-danger mb-3">
+                <div class="card-body">
+                    <h6 class="card-title">Pending Requests</h6>
+                    <h3>8</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Dummy Graph -->
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h5>User Roles Distribution</h5>
+                </div>
+                <div class="card-body">
+                    <img src="https://quickchart.io/chart?c={type:'pie',data:{labels:['Couples','Planners','Vendors','Admins'],datasets:[{data:[60,20,30,10]}]}}" alt="User Roles Pie Chart" class="img-fluid" />
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h5>Weddings by Month</h5>
+                </div>
+                <div class="card-body">
+                    <img src="https://quickchart.io/chart?c={type:'bar',data:{labels:['Jan','Feb','Mar','Apr','May','Jun'],datasets:[{label:'Weddings',data:[3,5,7,8,12,10]}]}}" alt="Weddings by Month Bar Chart" class="img-fluid" />
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Users Table -->
+    <div class="card mb-4">
+        <div class="card-header bg-primary text-white">
+            <h5 class="mb-0">Users</h5>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Username</th>
+                            <th>Role</th>
+                            <th>Email</th>
+                            <th>Status</th>
+                            <th>Registered</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>chamath123</td><td>Planner</td><td>chamath@example.com</td><td>Active</td><td>2024-01-10</td></tr>
+                        <tr><td>nilu456</td><td>Couple</td><td>nilu@example.com</td><td>Active</td><td>2024-02-15</td></tr>
+                        <tr><td>admin007</td><td>Admin</td><td>admin@example.com</td><td>Active</td><td>2023-12-01</td></tr>
+                        <tr><td>planny98</td><td>Planner</td><td>plan@example.com</td><td>Inactive</td><td>2024-03-05</td></tr>
+                        <tr><td>sandy21</td><td>Couple</td><td>sandy@example.com</td><td>Active</td><td>2024-04-20</td></tr>
+                        <tr><td>vendorpro</td><td>Vendor</td><td>vendorpro@example.com</td><td>Active</td><td>2024-05-01</td></tr>
+                        <tr><td>lucyplanner</td><td>Planner</td><td>lucy@example.com</td><td>Active</td><td>2024-05-10</td></tr>
+                        <tr><td>dreamcouple</td><td>Couple</td><td>dream@example.com</td><td>Inactive</td><td>2024-05-15</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <!-- Vendors Table -->
+    <div class="card mb-4">
+        <div class="card-header bg-warning">
+            <h5 class="mb-0">Vendors</h5>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Category</th>
+                            <th>Status</th>
+                            <th>Rating</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Grand Hotel</td><td>Venue</td><td>Active</td><td>4.5</td></tr>
+                        <tr><td>Capture Moments</td><td>Photography</td><td>Active</td><td>4.2</td></tr>
+                        <tr><td>Floral Dreams</td><td>Florist</td><td>Inactive</td><td>4.7</td></tr>
+                        <tr><td>Sweet Treats</td><td>Catering</td><td>Active</td><td>4.6</td></tr>
+                        <tr><td>Petal Paradise</td><td>Florist</td><td>Active</td><td>4.3</td></tr>
+                        <tr><td>Gourmet Bites</td><td>Catering</td><td>Active</td><td>4.4</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <!-- Weddings Table -->
+    <div class="card mb-4">
+        <div class="card-header bg-success text-white">
+            <h5 class="mb-0">Weddings</h5>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Couple</th>
+                            <th>Date</th>
+                            <th>Venue</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>John & Jane</td><td>2024-07-10</td><td>Palm Garden</td><td>Upcoming</td></tr>
+                        <tr><td>Mark & Lisa</td><td>2024-08-15</td><td>Ocean View</td><td>Upcoming</td></tr>
+                        <tr><td>Alex & Mia</td><td>2024-09-01</td><td>Sunset Hall</td><td>Pending</td></tr>
+                        <tr><td>Sam & Emma</td><td>2024-10-05</td><td>Royal Banquet</td><td>Pending</td></tr>
+                        <tr><td>Chamath & Nilu</td><td>2024-06-20</td><td>Colombo</td><td>Completed</td></tr>
+                        <tr><td>Sahan & Dilmi</td><td>2024-05-15</td><td>Kandy</td><td>Completed</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <!-- Recent Activity Table -->
+    <div class="card mb-4">
+        <div class="card-header">
+            <h5 class="mb-0">Recent Activity</h5>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>User</th>
+                            <th>Action</th>
+                            <th>Details</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>2024-06-01</td><td>chamath123</td><td>Registered</td><td>Planner</td></tr>
+                        <tr><td>2024-06-02</td><td>nilu456</td><td>Created Wedding</td><td>Colombo</td></tr>
+                        <tr><td>2024-06-03</td><td>admin007</td><td>Added Vendor</td><td>Grand Hotel</td></tr>
+                        <tr><td>2024-06-04</td><td>sandy21</td><td>Booked Vendor</td><td>Floral Dreams</td></tr>
+                        <tr><td>2024-06-05</td><td>lucyplanner</td><td>Approved Wedding</td><td>John & Jane</td></tr>
+                        <tr><td>2024-06-06</td><td>dreamcouple</td><td>Registered</td><td>Couple</td></tr>
+                        <tr><td>2024-06-07</td><td>vendorpro</td><td>Updated Profile</td><td>Vendor</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+@section Styles {
+    <style>
+        .card { transition: transform 0.2s; }
+        .card:hover { transform: translateY(-5px); }
+    </style>
+} 

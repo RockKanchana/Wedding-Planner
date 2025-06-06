@@ -1,0 +1,164 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Wedding_Planner</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/Wedding_Planner.styles.css" asp-append-version="true" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+    @RenderSection("Styles", required: false)
+</head>
+<body>
+    @using Microsoft.AspNetCore.Http
+    @{
+        var role = Context.Session.GetString("Role");
+    }
+
+    @section Scripts {
+        <partial name="_ValidationScriptsPartial" />
+    }
+
+    <header>
+        <nav class="navbar navbar-expand-lg bg-white shadow-sm" style="min-height: 75px;">
+            <div class="container-fluid">
+                <a class="navbar-brand d-flex align-items-center" href="/">
+                    <img src="~/img/Web-Logo-White-background-02.png" alt="DreamDay Logo" height="45" class="me-2 ms-4" />
+                </a>
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        @if (string.IsNullOrEmpty(role))
+                        {
+                            <!-- Guest Navbar -->
+                            <li class="nav-item me-4">
+                                <a class="nav-link text-dark" asp-controller="/" asp-action="">Home</a>
+                            </li>
+                            <li class="nav-item me-4">
+                                <a class="nav-link text-dark" asp-controller="/" asp-action="">Service</a>
+                            </li>
+                            <li class="nav-item me-4">
+                                <a class="nav-link text-dark" asp-controller="Account" asp-action="Login">Login</a>
+                            </li>
+                            <li class="nav-item dropdown me-4">
+                                <a class="nav-link dropdown-toggle text-dark" role="button" data-bs-toggle="dropdown">Register</a>
+                                <ul class="dropdown-menu dropdown-menu-end">
+                                    <li><a class="dropdown-item" asp-controller="Account" asp-action="RegisterCouple">As Couple</a></li>
+                                    <li><a class="dropdown-item" asp-controller="Account" asp-action="RegisterPlanner">As Planner</a></li>
+                                </ul>
+                            </li>
+                        }
+                        else if (role == "Admin")
+                        {
+                            <!-- Admin Navbar -->
+                            <li class="nav-item me-4">
+                                <a class="nav-link text-dark" asp-controller="Home" asp-action="AdminDashboard">Dashboard</a>
+                            </li>
+                            <li class="nav-item me-4">
+                                <a class="nav-link text-dark" asp-controller="Account" asp-action="Users">Manage Users</a>
+                            </li>
+                            <li class="nav-item me-4">
+                                <a class="nav-link text-dark" asp-controller="Vendors" asp-action="Vendors">Manage Vendors</a>
+                           </li>
+                            <li class="nav-item me-4">
+                                <a class="nav-link text-dark" asp-controller="Home" asp-action="AdminReports">Reports</a>
+                            </li>
+                            <li class="nav-item me-4">
+                                <a class="nav-link text-danger" asp-controller="Account" asp-action="Logout">Logout</a>
+                            </li>
+                        }
+                        else if (role == "Couple")
+                        {
+                            <!-- Couple Navbar -->
+                            <li class="nav-item me-4">
+                                <a class="nav-link text-dark" asp-controller="Home" asp-action="CoupleDashboard">Dashboard</a>
+                            </li>
+                            <li class="nav-item me-4">
+                                <a class="nav-link text-dark" asp-controller="Timeline" asp-action="Timeline">Timeline</a>
+                            </li>
+                          <li class="nav-item me-4">
+                               <a class="nav-link text-dark" asp-controller="Guest" asp-action="GuestManagement">Guest</a>
+                          </li>
+                           <li class="nav-item me-4">
+                                <a class="nav-link text-dark" asp-controller="Vendors" asp-action="Vendors">Manage Vendors</a>
+                           </li>
+
+                            <li class="nav-item me-4">
+                                <a class="nav-link text-danger" asp-controller="Account" asp-action="Logout">Logout</a>
+                            </li>
+                        }
+                        else if (role == "Planner")
+                        {
+                            <!-- Planner Navbar -->
+                            <li class="nav-item me-4">
+                                <a class="nav-link text-dark" asp-controller="Home" asp-action="PlannerDashboard">Dashboard</a>
+                            </li>
+                            <li class="nav-item me-4">
+                                <a class="nav-link text-dark" asp-controller="Home" asp-action="MyClients">My Clients</a>
+                            </li>
+                            <li class="nav-item me-4">
+                                <a class="nav-link text-dark" asp-controller="Home" asp-action="PlannerVendors">Vendors</a>
+                            </li>
+                            <li class="nav-item me-4">
+                                <a class="nav-link text-danger" asp-controller="Account" asp-action="Logout">Logout</a>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    @RenderSection("FullWidthContent", required: false)
+
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="bg-dark text-white mt-5 pt-5 pb-3">
+        <div class="container text-center" style="font-family: 'Poppins', sans-serif;">
+            <!-- Logo -->
+            <img src="~/img/footer-logo-BW.png" alt="The Wedding Planner Logo" height="50" class="mb-3">
+
+            <!-- Address and Contact Info -->
+            <p class="mb-1">33/23/01, 1st Lane, Galle Road, Bambalapitiya. 10100. Sri Lanka</p>
+            <p class="mb-1">+94 114 544 994</p>
+            <p class="mb-3">info@dreamdayweddingplanner.lk</p>
+
+            <!-- Social Media Icons -->
+            <div class="mb-4">
+                <a href="#" class="text-white me-3"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="text-white me-3"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="text-white me-3"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="text-white"><i class="fab fa-youtube"></i></a>
+            </div>
+
+            <!-- Copyright -->
+            <hr class="border-secondary" style="font-family: 'Poppins', sans-serif;">
+            <p class="small mb-4">
+                &copy; 2025 <strong>DreamDay Wedding Planner LK.</strong> All Rights Reserved.
+                Developed and Powered by <strong>Esoft</strong>
+            </p>
+        </div>
+    </footer>
+
+    <!-- jQuery first -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- jQuery Validate -->
+    <script src="https://cdn.jsdelivr.net/jquery.validation/1.19.3/jquery.validate.min.js"></script>
+
+    <!-- jQuery Validate Unobtrusive -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation-unobtrusive@3.2.12/dist/jquery.validate.unobtrusive.min.js"></script>
+
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,150 @@
+@{
+    ViewData["Title"] = "Couple Dashboard";
+}
+
+<div class="container mt-4">
+    <h2>Welcome, @ViewBag.CoupleName!</h2>
+    <div class="row mt-4">
+        <div class="col-md-3">
+            <div class="card bg-primary text-white">
+                <div class="card-body">
+                    <h5 class="card-title">Days Until Wedding</h5>
+                    <h2 class="card-text">@ViewBag.DaysUntilWedding</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card bg-success text-white">
+                <div class="card-body">
+                    <h5 class="card-title">Budget Used</h5>
+                    <h2 class="card-text">@ViewBag.BudgetUsed</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card bg-info text-white">
+                <div class="card-body">
+                    <h5 class="card-title">Guest Count</h5>
+                    <h2 class="card-text">@ViewBag.GuestCount</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card bg-warning text-white">
+                <div class="card-body">
+                    <h5 class="card-title">Tasks Completed</h5>
+                    <h2 class="card-text">@ViewBag.TasksCompleted%</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h5>Wedding Details</h5>
+                </div>
+                <div class="card-body">
+                    <dl class="row">
+                        <dt class="col-sm-4">Date</dt>
+                        <dd class="col-sm-8">@ViewBag.WeddingDate.ToLongDateString()</dd>
+
+                        <dt class="col-sm-4">Venue</dt>
+                        <dd class="col-sm-8">@ViewBag.Venue</dd>
+
+                        <dt class="col-sm-4">Theme</dt>
+                        <dd class="col-sm-8">@ViewBag.Theme</dd>
+
+                        <dt class="col-sm-4">Wedding Planner</dt>
+                        <dd class="col-sm-8">@ViewBag.WeddingPlanner</dd>
+                    </dl>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h5>Upcoming Tasks</h5>
+                </div>
+                <div class="card-body">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Task</th>
+                                <th>Due Date</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var task in ViewBag.UpcomingTasks)
+                            {
+                                <tr>
+                                    <td>@task.Name</td>
+                                    <td>@task.DueDate.ToShortDateString()</td>
+                                    <td>
+                                        <span class="badge bg-@(task.Status == "Completed" ? "success" : "warning")">
+                                            @task.Status
+                                        </span>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5>Vendor Progress</h5>
+                </div>
+                <div class="card-body">
+                    <div class="progress mb-3">
+                        <div class="progress-bar" role="progressbar" style="width: @ViewBag.VendorProgress%" 
+                             aria-valuenow="@ViewBag.VendorProgress" aria-valuemin="0" aria-valuemax="100">
+                            @ViewBag.VendorProgress%
+                        </div>
+                    </div>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Vendor</th>
+                                <th>Service</th>
+                                <th>Status</th>
+                                <th>Contract</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var vendor in ViewBag.Vendors)
+                            {
+                                <tr>
+                                    <td>@vendor.Name</td>
+                                    <td>@vendor.Service</td>
+                                    <td>
+                                        <span class="badge bg-@(vendor.Status == "Confirmed" ? "success" : "warning")">
+                                            @vendor.Status
+                                        </span>
+                                    </td>
+                                    <td>
+                                        @if (vendor.HasContract)
+                                        {
+                                            <span class="badge bg-success">Signed</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="badge bg-warning">Pending</span>
+                                        }
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> 

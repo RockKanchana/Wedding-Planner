@@ -1,0 +1,154 @@
+﻿@model Wedding_Planner.Models.DTO.WeddingPlannerRegisterModel
+@{
+    ViewData["Title"] = "Register as Wedding Planner";
+}
+
+@section Styles {
+    <style>
+        .register-container {
+            display: flex;
+        }
+
+        .register-image {
+            flex: 1;
+            background: url('/img/login1.jpg') no-repeat center center;
+            background-size: cover;
+            height: 100vh;
+        }
+
+        .register-form-section {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #ffffff;
+            padding: 40px;
+        }
+
+        .form-card {
+            width: 100%;
+            max-width: 800px;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-card h2 {
+            margin-bottom: 30px;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .form-col {
+            flex: 1 1 48%;
+        }
+
+        .btn-register {
+            background-color: #3366ff;
+            color: white;
+        }
+
+            .btn-register:hover {
+                background-color: #4d79ff;
+                color: white;
+            }
+
+        .text-danger {
+            font-size: 12px;
+        }
+
+
+       
+    </style>
+}
+
+<div class="register-container mt-5">
+    <div class="register-image"></div>
+    <div class="register-form-section">
+        <div class="form-card">
+            <h2>Register as a Planner</h2>
+            @if (!ViewData.ModelState.IsValid)
+            {
+                <div class="alert alert-danger alert-dismissible fade show" role="alert" id="errorAlert">
+                    <ul class="mb-0">
+                        @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+                        {
+                            <li>@error.ErrorMessage</li>
+                        }
+                    </ul>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+
+                <script>
+                    setTimeout(function () {
+                        var alert = bootstrap.Alert.getOrCreateInstance(document.getElementById('errorAlert'));
+                        alert.close();
+                    }, 5000); // Auto-dismiss after 5 seconds
+                </script>
+            }
+
+            <form asp-action="RegisterPlanner" method="post">
+                <div class="form-row">
+                    <div class="mb-3 form-col">
+                        <label asp-for="Name" class="form-label"></label>
+                        <input asp-for="Name" class="form-control" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3 form-col">
+                        <label asp-for="Email" class="form-label"></label>
+                        <input asp-for="Email" class="form-control" />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3 form-col">
+                        <label asp-for="YearsOfExperience" class="form-label"></label>
+                        <input asp-for="YearsOfExperience" class="form-control" type="number" />
+                        <span asp-validation-for="YearsOfExperience" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3 form-col">
+                        <label asp-for="ServiceAreas" class="form-label"></label>
+                        <input asp-for="ServiceAreas" class="form-control" />
+                        <span asp-validation-for="ServiceAreas" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3 form-col">
+                        <label asp-for="HourlyRate" class="form-label"></label>
+                        <input asp-for="HourlyRate" class="form-control" type="number" step="0.01" />
+                        <span asp-validation-for="HourlyRate" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3 form-col">
+                        <label asp-for="Contact" class="form-label"></label>
+                        <input asp-for="Contact" class="form-control" />
+                        <span asp-validation-for="Contact" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3 form-col">
+                        <label asp-for="Password" class="form-label"></label>
+                        <input asp-for="Password" class="form-control" type="password" />
+                        <span asp-validation-for="Password" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3 form-col">
+                        <label asp-for="ConfirmPassword" class="form-label"></label>
+                        <input asp-for="ConfirmPassword" class="form-control" type="password" />
+                        <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="d-grid mt-4">
+                    <button type="submit" class="btn btn-register btn-lg">Register</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

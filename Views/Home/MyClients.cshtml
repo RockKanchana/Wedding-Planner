@@ -1,0 +1,175 @@
+@{
+    ViewData["Title"] = "My Clients";
+    var acceptedClients = ViewBag.AcceptedClients as List<dynamic>;
+    var coupleRequests = ViewBag.CoupleRequests as List<dynamic>;
+    var weddingDetails = ViewBag.WeddingDetails as Dictionary<int, dynamic>;
+}
+
+<div class="container mt-4">
+    <h2 class="mb-4">My Clients</h2>
+
+    <!-- Accepted Clients & Weddings -->
+    <div class="card mb-4">
+        <div class="card-header bg-success text-white">
+            <h5 class="mb-0">Accepted Clients & Weddings</h5>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover" id="acceptedClientsTable">
+                    <thead class="table-success">
+                        <tr>
+                            <th>Couple Name</th>
+                            <th>Wedding Date</th>
+                            <th>Venue</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var client in acceptedClients)
+                        {
+                            <tr>
+                                <td>@client.CoupleName</td>
+                                <td>@client.WeddingDate.ToShortDateString()</td>
+                                <td>@client.Venue</td>
+                                <td><span class="badge bg-success">@client.Status</span></td>
+                                <td>
+                                    <button class="btn btn-sm btn-info" onclick="showAcceptedWeddingDetails('@client.CoupleName', '@client.WeddingDate.ToShortDateString()', '@client.Venue', '@client.Status')" data-bs-toggle="modal" data-bs-target="#acceptedWeddingDetailsModal">View</button>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Couple Requests -->
+    <div class="card mb-4">
+        <div class="card-header bg-warning">
+            <h5 class="mb-0">Couple Requests</h5>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover" id="coupleRequestsTable">
+                    <thead class="table-warning">
+                        <tr>
+                            <th>Couple Name</th>
+                            <th>Wedding Date</th>
+                            <th>Venue</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var req in coupleRequests)
+                        {
+                            <tr data-request-id="@req.RequestId">
+                                <td>@req.CoupleName</td>
+                                <td>@req.WeddingDate.ToShortDateString()</td>
+                                <td>@req.Venue</td>
+                                <td><span class="badge bg-warning text-dark">@req.Status</span></td>
+                                <td>
+                                    <button class="btn btn-sm btn-info" data-bs-toggle="modal" data-bs-target="#weddingDetailsModal" onclick="showWeddingDetails(@req.RequestId)">View</button>
+                                    <button class="btn btn-sm btn-success" onclick="acceptRequest(this)">Accept</button>
+                                    <button class="btn btn-sm btn-danger" onclick="rejectRequest(this)">Reject</button>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Wedding Details Modal for Requests -->
+    <div class="modal fade" id="weddingDetailsModal" tabindex="-1" aria-labelledby="weddingDetailsModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="weddingDetailsModalLabel">Wedding Details</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="weddingDetailsBody">
+                    <!-- Details will be loaded by JS -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Wedding Details Modal for Accepted Clients -->
+    <div class="modal fade" id="acceptedWeddingDetailsModal" tabindex="-1" aria-labelledby="acceptedWeddingDetailsModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="acceptedWeddingDetailsModalLabel">Wedding Details</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="acceptedWeddingDetailsBody">
+                    <!-- Details will be loaded by JS -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        const weddingDetails = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(ViewBag.WeddingDetails));
+        function showWeddingDetails(requestId) {
+            const details = weddingDetails[requestId];
+            if (details) {
+                document.getElementById('weddingDetailsBody').innerHTML = `
+                    <strong>Couple Name:</strong> ${details.CoupleName}<br>
+                    <strong>Wedding Date:</strong> ${new Date(details.WeddingDate).toLocaleDateString()}<br>
+                    <strong>Venue:</strong> ${details.Venue}<br>
+                    <strong>Theme:</strong> ${details.Theme}<br>
+                    <strong>Guests:</strong> ${details.Guests}<br>
+                    <strong>Budget:</strong> ${details.Budget}<br>
+                `;
+            }
+        }
+
+        function showAcceptedWeddingDetails(coupleName, weddingDate, venue, status) {
+            document.getElementById('acceptedWeddingDetailsBody').innerHTML = `
+                <strong>Couple Name:</strong> ${coupleName}<br>
+                <strong>Wedding Date:</strong> ${weddingDate}<br>
+                <strong>Venue:</strong> ${venue}<br>
+                <strong>Status:</strong> ${status}<br>
+                <strong>Theme:</strong> Classic<br>
+                <strong>Guests:</strong> 120<br>
+                <strong>Budget:</strong> $12,000<br>
+            `;
+        }
+
+        function acceptRequest(btn) {
+            const row = btn.closest('tr');
+            const coupleName = row.children[0].innerText;
+            const weddingDate = row.children[1].innerText;
+            const venue = row.children[2].innerText;
+            // Add to accepted clients table
+            const acceptedTable = document.getElementById('acceptedClientsTable').getElementsByTagName('tbody')[0];
+            const newRow = acceptedTable.insertRow();
+            newRow.innerHTML = `
+                <td>${coupleName}</td>
+                <td>${weddingDate}</td>
+                <td>${venue}</td>
+                <td><span class='badge bg-success'>Accepted</span></td>
+                <td><button class='btn btn-sm btn-info' onclick="showAcceptedWeddingDetails('${coupleName}', '${weddingDate}', '${venue}', 'Accepted')" data-bs-toggle='modal' data-bs-target='#acceptedWeddingDetailsModal'>View</button></td>
+            `;
+            // Remove from requests table
+            row.remove();
+        }
+
+        function rejectRequest(btn) {
+            const row = btn.closest('tr');
+            row.remove();
+        }
+    </script>
+} 

@@ -1,0 +1,68 @@
+﻿@{
+    ViewData["Title"] = "Welcome";
+}
+@section FullWidthContent {
+    <div style="
+        background: linear-gradient(to bottom right, rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('@Url.Content("~/img/wedding-bg.jpg")') no-repeat center center;
+        background-size: cover;
+        height: 100vh;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        text-align: center;
+        ">
+        <div class="container px-4">
+            <h1 class="display-4 fw-bold">Welcome to <span style="color: #FF6F6F;">DreamDay</span></h1>
+            <p class="lead mt-3">Your all-in-one wedding planning solution. Let us help you make your dream wedding a reality.</p>
+            <a href="/Account/Register" class="btn btn-lg mt-3" style="background-color: #FF6F6F; color: white; border: none;">
+                Get Started
+            </a>
+        </div>
+    </div>
+}
+
+
+
+
+
+<!-- Our Services Section (Unchanged) -->
+<div class="container my-5">
+    <h6 class="text-center text-uppercase text-muted" style="font-family: 'Poppins', sans-serif;">What We Do</h6>
+    <p class="text-center mb-4" style="color: #8e44ad;  font-size: 40px; font-family: 'Poppins'">Our Services</p>
+    <p class="text-center mx-auto" style="max-width: 800px; font-family: 'Poppins', sans-serif;">
+        Planning a wedding in <span class="text-primary">Sri Lanka</span> whilst living overseas or with your busy working schedule?
+        Or you would like the luxury of having a professional take care of your wedding needs from beginning to end?
+        We will take away any stress and anxiety.<br>
+        That's why you need DREAMDAY WEDDING PLANNER.
+    </p>
+
+    <div class="row text-center mt-5">
+        <!-- Wedding Planning -->
+        <div class="col-md-3 mb-4">
+            <img src="~/img/wed-plan.jpg" class="img-fluid rounded shadow" alt="Wedding Planning">
+            <h6 class="mt-3" style="color: #8e44ad;"><em>Wedding Planning</em></h6>
+        </div>
+
+        <!-- Event Planning -->
+        <div class="col-md-3 mb-4">
+            <img src="~/img/vender-wed.jpg" class="img-fluid rounded shadow" alt="Vender">
+            <h6 class="mt-3" style="color: #8e44ad;"><em>Vendors Coordination</em></h6>
+        </div>
+
+        <!-- Destination Weddings -->
+        <div class="col-md-3 mb-4">
+            <img src="~/img/detination-wed.jpg" class="img-fluid rounded shadow" alt="Destination Weddings">
+            <h6 class="mt-3" style="color: #8e44ad;"><em>Destination Weddings</em></h6>
+        </div>
+
+        <!-- Venue Coordination -->
+        <div class="col-md-3 mb-4">
+            <img src="~/img/venue-wed.jpg" class="img-fluid rounded shadow" alt="Venue Coordination">
+            <h6 class="mt-3" style="color: #8e44ad;"><em>Venue Coordination</em></h6>
+        </div>
+    </div>
+</div>

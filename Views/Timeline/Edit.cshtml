@@ -1,0 +1,52 @@
+﻿@model Wedding_Planner.Models.DTO.WeddingTimelineViewModel
+
+@{
+    ViewBag.Title = "Edit Timeline Event";
+}
+
+<div class="container mt-5">
+    <h2>Edit Timeline Event</h2>
+
+    <form asp-action="Edit" method="post">
+        <input type="hidden" name="Id" value="@Model.Id" />
+        <input type="hidden" name="WeddingId" value="@Model.WeddingId" />
+
+        <div class="mb-3">
+            <label for="EventName" class="form-label">Event Name</label>
+            <input type="text" name="EventName" class="form-control" value="@Model.EventName" required />
+        </div>
+
+        <div class="mb-3">
+            <label for="Description" class="form-label">Description</label>
+            <textarea name="Description" class="form-control">@Model.Description</textarea>
+        </div>
+
+        <div class="mb-3">
+            <label for="StartTime" class="form-label">Start Time</label>
+            <input type="datetime-local" name="StartTime" class="form-control" value="@Model.StartTime.ToString("yyyy-MM-ddTHH:mm")" required />
+        </div>
+
+        <div class="mb-3">
+            <label for="EndTime" class="form-label">End Time</label>
+            <input type="datetime-local" name="EndTime" class="form-control" value="@Model.EndTime.ToString("yyyy-MM-ddTHH:mm")" required />
+        </div>
+
+        <div class="mb-3">
+            <label for="Location" class="form-label">Location</label>
+            <input type="text" name="Location" class="form-control" value="@Model.Location" />
+        </div>
+
+        <div class="mb-3">
+            <label for="Status" class="form-label">Status</label>
+            <select name="Status" class="form-select">
+                <option value="Planned" selected="@("Planned" == Model.Status)">Planned</option>
+                <option value="Confirmed" selected="@("Confirmed" == Model.Status)">Confirmed</option>
+                <option value="Completed" selected="@("Completed" == Model.Status)">Completed</option>
+                <option value="Cancelled" selected="@("Cancelled" == Model.Status)">Cancelled</option>
+            </select>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Update</button>
+        <a asp-action="Timeline" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>

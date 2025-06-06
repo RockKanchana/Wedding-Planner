@@ -1,0 +1,112 @@
+@{
+    ViewData["Title"] = "Wedding Planner Dashboard";
+}
+
+<div class="container mt-4">
+    <h2>Wedding Planner Dashboard</h2>
+    <div class="row mt-4">
+        <div class="col-md-3">
+            <div class="card bg-primary text-white">
+                <div class="card-body">
+                    <h5 class="card-title">Active Weddings</h5>
+                    <h2 class="card-text">@ViewBag.ActiveWeddings</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card bg-success text-white">
+                <div class="card-body">
+                    <h5 class="card-title">Upcoming Tasks</h5>
+                    <h2 class="card-text">@ViewBag.UpcomingTasks</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card bg-info text-white">
+                <div class="card-body">
+                    <h5 class="card-title">Total Budget</h5>
+                    <h2 class="card-text">$@ViewBag.TotalBudget</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card bg-warning text-white">
+                <div class="card-body">
+                    <h5 class="card-title">Vendor Contracts</h5>
+                    <h2 class="card-text">@ViewBag.VendorContracts</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h5>My Weddings</h5>
+                </div>
+                <div class="card-body">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Couple</th>
+                                <th>Date</th>
+                                <th>Venue</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var wedding in ViewBag.MyWeddings)
+                            {
+                                <tr>
+                                    <td>@wedding.CoupleName</td>
+                                    <td>@wedding.Date.ToShortDateString()</td>
+                                    <td>@wedding.Venue</td>
+                                    <td>
+                                        <span class="badge bg-@(wedding.Status == "Active" ? "success" : "warning")">
+                                            @wedding.Status
+                                        </span>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h5>Upcoming Tasks</h5>
+                </div>
+                <div class="card-body">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Task</th>
+                                <th>Wedding</th>
+                                <th>Due Date</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var task in ViewBag.UpcomingTasksList)
+                            {
+                                <tr>
+                                    <td>@task.Name</td>
+                                    <td>@task.WeddingName</td>
+                                    <td>@task.DueDate.ToShortDateString()</td>
+                                    <td>
+                                        <span class="badge bg-@(task.Status == "Completed" ? "success" : "warning")">
+                                            @task.Status
+                                        </span>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> 

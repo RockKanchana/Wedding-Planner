@@ -1,0 +1,87 @@
+﻿@model List<Wedding_Planner.Models.DTO.WeddingTimelineViewModel>
+@{
+    ViewBag.Title = "Wedding Timeline";
+    var weddingId = ViewBag.WeddingId;
+}
+
+<div class="container mt-4">
+    <h2 class="mb-4">Wedding Timeline</h2>
+
+    <!-- Add Timeline Button -->
+    <button class="btn btn-success mb-3" data-bs-toggle="modal" data-bs-target="#addTimelineModal">+ Add Timeline Event</button>
+
+    <!-- Timeline Cards -->
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            <div class="col-md-6">
+                <div class="card shadow-sm mb-4 border-start border-4 border-primary">
+                    <div class="card-body">
+                        <h5 class="card-title">@item.EventName</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">@item.StartTime.ToString("g") - @item.EndTime.ToString("g")</h6>
+                        <p class="card-text"><strong>Location:</strong> @item.Location</p>
+                        <p class="card-text"><strong>Description:</strong> @item.Description</p>
+                        <p class="card-text"><strong>Status:</strong> @item.Status</p>
+                        <div class="d-flex justify-content-end">
+                            <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-outline-primary me-2">Edit</a>
+                            <form asp-action="Delete" method="post" onsubmit="return confirm('Are you sure you want to delete this event?');">
+                                <input type="hidden" name="id" value="@item.Id" />
+                                <button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<!-- Modal: Add Timeline -->
+<div class="modal fade" id="addTimelineModal" tabindex="-1" aria-labelledby="addTimelineModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form asp-controller="Timeline" asp-action="AddTimeline" method="post">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addTimelineModalLabel">Add Timeline Event</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" name="WeddingId" value="@weddingId" />
+
+                    <div class="mb-3">
+                        <label for="EventName" class="form-label">Event Name</label>
+                        <input type="text" name="EventName" class="form-control" required />
+                    </div>
+                    <div class="mb-3">
+                        <label for="Description" class="form-label">Description</label>
+                        <textarea name="Description" class="form-control" rows="2"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="StartTime" class="form-label">Start Time</label>
+                        <input type="datetime-local" name="StartTime" class="form-control" required />
+                    </div>
+                    <div class="mb-3">
+                        <label for="EndTime" class="form-label">End Time</label>
+                        <input type="datetime-local" name="EndTime" class="form-control" required />
+                    </div>
+                    <div class="mb-3">
+                        <label for="Location" class="form-label">Location</label>
+                        <input type="text" name="Location" class="form-control" />
+                    </div>
+                    <div class="mb-3">
+                        <label for="Status" class="form-label">Status</label>
+                        <select name="Status" class="form-select">
+                            <option value="Planned">Planned</option>
+                            <option value="Confirmed">Confirmed</option>
+                            <option value="Completed">Completed</option>
+                            <option value="Cancelled">Cancelled</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Add Event</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
