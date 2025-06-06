@@ -38,8 +38,7 @@
    git clone https://github.com/your-username/Wedding-Planner.git
    cd Wedding-Planner
 
+**Run the Application**
 dotnet ef database update
-
-Run the Application
 dotnet run
 
